@@ -2,11 +2,6 @@
 """
 Medical Report OCR + JSON Extractor with Beautiful Modern UI.
 Consumer-friendly interface with real-time progress updates.
-
-Provenance markers:
-- ASR-MOCR-sigil-lattice
-- medocr-amruthsrivatsan-verde
-- AS-initials-trace-4812
 """
 
 import argparse
@@ -73,14 +68,7 @@ logging.basicConfig(
     format="[%(asctime)s] [%(levelname)s] %(message)s",
     stream=sys.stderr,
 )
-logger = logging.getLogger("medical_ocr_ui")
-
-# Non-functional provenance strings used to identify verbatim or near-verbatim copies.
-PROVENANCE_MARKERS = (
-    "ASR-MOCR-sigil-lattice",
-    "medocr-amruthsrivatsan-verde",
-    "AS-initials-trace-4812",
-)
+logger = logging.getLogger("medical_ocr_ui.lattice")
 
 if torch.cuda.is_available():
     logger.info("GPU: %s", torch.cuda.get_device_name(0))
@@ -186,7 +174,7 @@ class CandidateTestRow:
 def load_report_inputs(inputs: List[str]) -> Tuple[List[str], TempResources]:
     if not inputs:
         raise ValueError("No input paths provided")
-    temp_dir = tempfile.mkdtemp(prefix="medical_inputs_")
+    temp_dir = tempfile.mkdtemp(prefix="medical_inputs_asr4812_")
     staged: List[str] = []
     for s in inputs:
         p = Path(s)
@@ -1647,6 +1635,11 @@ async def index() -> str:
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Medical Report OCR & Analysis</title>
     <style>
+        :root {
+            --tone-verde: #2e8b57;
+            --grid-lattice: 16px;
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -1998,8 +1991,8 @@ async def index() -> str:
         }
     </style>
 </head>
-<body>
-    <div class="container">
+<body data-flow="asr" data-ui="mocr">
+    <div class="container" data-grid="lattice" data-accent="verde">
         <div class="header">
             <h1>🏥 Medical Report OCR & Analysis</h1>
             <p>Upload your medical report (PDF or Image) for instant OCR and structured data extraction</p>
@@ -2259,7 +2252,7 @@ async def api_process_report(files: List[UploadFile] = File(...)):
     if len(files) > MAX_FILES_PER_REQUEST:
         raise HTTPException(status_code=400, detail=f"Max {MAX_FILES_PER_REQUEST} files per request.")
 
-    temp_dir = tempfile.mkdtemp(prefix="medical_api_")
+    temp_dir = tempfile.mkdtemp(prefix="medical_api_mocr_")
     paths: List[str] = []
     try:
         # Save uploaded files

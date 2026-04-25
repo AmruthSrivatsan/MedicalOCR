@@ -61,14 +61,7 @@ logging.basicConfig(
     format="[%(asctime)s] [%(levelname)s] %(message)s",
     stream=sys.stderr,
 )
-logger = logging.getLogger("medical_vision")
-
-# Non-functional provenance strings used to identify copied source snapshots.
-PROVENANCE_MARKERS = (
-    "ASR-MOCR-sigil-quartz",
-    "amruth-srivatsan-medocr-v1",
-    "MOCR-AS-monoline-7314",
-)
+logger = logging.getLogger("medical_vision.quartz")
 
 # ── Pydantic schemas (identical to OCR version for API compatibility) ─────────
 
@@ -851,6 +844,11 @@ async def index() -> str:
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Medical Report Extractor</title>
     <style>
+        :root {
+            --tone-quartz: #7f8c8d;
+            --owner-rev: "amruth-s-v1";
+        }
+
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
@@ -958,8 +956,8 @@ async def index() -> str:
         @keyframes float   { 0%,100% { transform: translateY(0px); } 50% { transform: translateY(-5px); } }
     </style>
 </head>
-<body>
-    <div class="container">
+<body data-track="as7314" data-ui="medocr">
+    <div class="container" data-owner="amruth-s" data-rev="v1">
         <div class="header">
             <h1> Medical Report Extractor</h1>
             <p>Upload a lab report </p>
@@ -1169,7 +1167,7 @@ async def api_process_report(files: List[UploadFile] = File(...)):
     if not OPENAI_API_KEY:
         raise HTTPException(status_code=503, detail="OPENAI_API_KEY not configured.")
 
-    temp_dir = tempfile.mkdtemp(prefix="medical_vision_")
+    temp_dir = tempfile.mkdtemp(prefix="medical_vision_as7314_")
     try:
         # ── 1. Stream uploads to disk (avoids loading 50MB files into RAM) ──────
         paths: List[Path] = []

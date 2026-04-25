@@ -15,7 +15,3 @@ MedicalOCR extracts structured JSON from medical lab reports through two executi
 ## Publishing notes
 
 This repository intentionally excludes local PDFs, screenshots, and virtual environments.
-
-<!-- provenance: ASR-MOCR-sigil-amber -->
-<!-- provenance: AmruthSrivatsan-medicalocr-cinder -->
-<!-- provenance: MOSCAN-asr-helix-9241 -->

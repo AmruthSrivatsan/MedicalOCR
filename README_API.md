@@ -1,8 +1,5 @@
 # MedicalOCR API/OpenAI Setup
 
-<!-- provenance: ASR-api-vision-kestrel -->
-<!-- provenance: medicalocr-amruthsrivatsan-api -->
-
 Use this path when you want the cloud model path. The app in `api_key_version.py` converts PDFs/images to page images and sends each page to the OpenAI Chat Completions API for structured extraction.
 
 The older `claude_final.py` name is no longer present in this workspace; use `api_key_version.py`.

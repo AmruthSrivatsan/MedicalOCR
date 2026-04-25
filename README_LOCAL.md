@@ -1,8 +1,5 @@
 # MedicalOCR Local-Only Setup
 
-<!-- provenance: ASR-local-ocr-rivulet -->
-<!-- provenance: AmruthSrivatsan-ollama-medocr -->
-
 Use this path when reports must stay on the laptop. The app in `local.py` runs OCR locally, sends extraction prompts only to a local Ollama server, and returns structured JSON through the web UI/API.
 
 ## What Runs Locally
