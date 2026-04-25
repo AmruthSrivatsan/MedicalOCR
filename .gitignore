@@ -1,0 +1,23 @@
+venv/
+__pycache__/
+*.pyc
+.env
+.env.*
+*.log
+*.tmp
+*.swp
+.DS_Store
+
+# Local medical documents should never be published.
+*.pdf
+*.png
+*.jpg
+*.jpeg
+*.tif
+*.tiff
+*.bmp
+NAGASHANKAR/
+SATHYAVATHY/
+
+# Local notes
+work_on.md

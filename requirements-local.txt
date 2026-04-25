@@ -1,0 +1,21 @@
+# Local-only OCR + Ollama path for local.py
+fastapi
+uvicorn[standard]
+python-multipart
+requests
+pillow
+pydantic
+tqdm
+
+# OCR and PDF/image processing
+numpy
+opencv-python
+pytesseract
+pdf2image
+python-doctr[torch]
+paddleocr
+paddlepaddle
+
+# Model runtime used by docTR. Install a CUDA-specific wheel first if needed.
+torch
+torchvision

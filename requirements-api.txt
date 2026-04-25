@@ -1,0 +1,8 @@
+# OpenAI vision API path for api_key_version.py
+fastapi
+uvicorn[standard]
+python-multipart
+requests
+pillow
+pydantic
+pdf2image
